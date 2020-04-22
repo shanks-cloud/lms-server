@@ -50,4 +50,8 @@ public class BookService {
 		return bookRepository.findByIsbn(isbn);
 	}
 	
+	public void deleteBookByIsbn(long isbn) {
+		bookRepository.deleteById(isbn);
+    }
+	
 }

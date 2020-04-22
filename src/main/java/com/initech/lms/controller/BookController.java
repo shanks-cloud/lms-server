@@ -20,12 +20,12 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 
-	@RequestMapping(value="/book", method=RequestMethod.POST)
+	@RequestMapping(value="/Books", method=RequestMethod.POST)
 	public void addBook(@RequestBody Book book) {
 		bookService.addBook(book);
 	}
 	
-	@RequestMapping(value="/book/viewAllBooks", method=RequestMethod.GET)
+	@RequestMapping(value="/Books/viewAllBooks", method=RequestMethod.GET)
 	public List<Book> viewAllBooks() {
 		return bookService.getAllBooks();
 	}
@@ -35,7 +35,7 @@ public class BookController {
 	//		bookService.updateBook(bookId, book);
 	//	}
 	
-	@RequestMapping(method=RequestMethod.PUT, value="/book/editBook/{isbn}")
+	@RequestMapping(value="/Books/editBook/{isbn}", method=RequestMethod.PUT)
 	public void updateBook(@RequestBody Book book){
 			bookService.updateBook(book);
 	}
@@ -45,9 +45,14 @@ public class BookController {
 	//		return bookService.getBook(bookId);
 	//	}
 	
-	@RequestMapping("/book/{isbn}")
+	@RequestMapping(value="/Books/fetchBook/{isbn}", method=RequestMethod.GET)
 	public List<Book> getBook(@PathVariable long isbn){
+		System.out.println("isbn inside controller is " + isbn);
 		return bookService.getBook(isbn);
 	}
 	
+	@RequestMapping(value="/Books/deleteBook/{isbn}", method=RequestMethod.DELETE)
+    public void deleteBookByIsbn(@PathVariable long isbn) {
+         bookService.deleteBookByIsbn(isbn);
+    }
 }
