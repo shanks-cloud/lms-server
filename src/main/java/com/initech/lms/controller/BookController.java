@@ -1,5 +1,6 @@
 package com.initech.lms.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,12 @@ import com.initech.lms.services.BookService;
 @CrossOrigin(origins="http://localhost:4200")
 public class BookController {
 	
+	
 	@Autowired
 	private BookService bookService;
 
 	@RequestMapping(value="/Books", method=RequestMethod.POST)
-	public void addBook(@RequestBody Book book) {
+	public void addBook(@RequestBody Book book) throws IOException, InterruptedException {
 		bookService.addBook(book);
 	}
 	
@@ -30,29 +32,21 @@ public class BookController {
 		return bookService.getAllBooks();
 	}
 	
-	//@RequestMapping(method=RequestMethod.PUT, value="/book/editBook/{bookId}")
-	//	public void updateBook(@PathVariable int bookId, @RequestBody Book book ){
-	//		bookService.updateBook(bookId, book);
-	//	}
-	
 	@RequestMapping(value="/Books/editBook/{isbn}", method=RequestMethod.PUT)
 	public void updateBook(@RequestBody Book book){
 			bookService.updateBook(book);
 	}
 	
-	//	@RequestMapping("/book/{bookId}")
-	//	public Book getBook(@PathVariable int bookId){
-	//		return bookService.getBook(bookId);
-	//	}
-	
 	@RequestMapping(value="/Books/fetchBook/{isbn}", method=RequestMethod.GET)
-	public List<Book> getBook(@PathVariable long isbn){
+	public List<Book> getBookByIsbn(@PathVariable long isbn){
 		System.out.println("isbn inside controller is " + isbn);
-		return bookService.getBook(isbn);
+		return bookService.getBookByIsbn(isbn);
 	}
 	
 	@RequestMapping(value="/Books/deleteBook/{isbn}", method=RequestMethod.DELETE)
     public void deleteBookByIsbn(@PathVariable long isbn) {
          bookService.deleteBookByIsbn(isbn);
     }
+	
+	
 }
