@@ -1,9 +1,12 @@
 package com.initech.lms.models;
 
 import javax.persistence.Column;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,12 +14,13 @@ import javax.persistence.Table;
 @Table(name = "Book")
 public class Book {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "bookId")
-	private int bookId;
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.AUTO)
+//	@Column(name = "bookId")
+//	private int bookId;
 
-	@Column(name = "isbn", nullable = false)
+	@Id
+	@Column(name = "isbn")
 	private long isbn;
 
 	@Column(name = "bookTitle", nullable = false)
@@ -33,30 +37,35 @@ public class Book {
 
 	@Column(name = "bookCategory", nullable = false)
 	private String bookCategory;
-
+	
+	@Column(name = "bookImageName")
+	private String bookImageName;
+	
+	
 	public Book() {
 
 	}
 
-	public Book(int bookId, long isbn, String bookTitle, String publisher, String author, String inclusionDate,
-			String bookCategory) {
+	public Book(long isbn, String bookTitle, String publisher, String author, String inclusionDate,
+			String bookCategory, String bookImageName) {
 		super();
-		this.bookId = bookId;
+		//this.bookId = bookId;
 		this.isbn = isbn;
 		this.bookTitle = bookTitle;
 		this.publisher = publisher;
 		this.author = author;
 		this.inclusionDate = inclusionDate;
 		this.bookCategory = bookCategory;
+		this.bookImageName = bookImageName;
 	}
 
-	public int getBookId() {
-		return bookId;
-	}
-
-	public void setBookId(int bookId) {
-		this.bookId = bookId;
-	}
+//	public int getBookId() {
+//		return bookId;
+//	}
+//
+//	public void setBookId(int bookId) {
+//		this.bookId = bookId;
+//	}
 
 	public long getIsbn() {
 		return isbn;
@@ -105,5 +114,14 @@ public class Book {
 	public void setBookCategory(String bookCategory) {
 		this.bookCategory = bookCategory;
 	}
+
+	public String getBookImageName() {
+		return bookImageName;
+	}
+
+	public void setBookImageName(String bookImageName) {
+		this.bookImageName = bookImageName;
+	}
+
 
 }
