@@ -1,6 +1,7 @@
 package com.initech.lms.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,14 @@ import com.initech.lms.services.BookService;
 @CrossOrigin(origins="http://localhost:4200")
 public class BookController {
 	
+	String dirPath = "assets/images/target/";
+	boolean flag=true;
 	
 	@Autowired
 	private BookService bookService;
 
 	@RequestMapping(value="/Books", method=RequestMethod.POST)
-	public void addBook(@RequestBody Book book) throws IOException, InterruptedException {
+	public void addBook(@RequestBody Book book) throws IOException {
 		bookService.addBook(book);
 	}
 	
@@ -46,6 +49,21 @@ public class BookController {
 	@RequestMapping(value="/Books/deleteBook/{isbn}", method=RequestMethod.DELETE)
     public void deleteBookByIsbn(@PathVariable long isbn) {
          bookService.deleteBookByIsbn(isbn);
+    }
+	
+	@RequestMapping(value="/Catalog/{bookCategory}", method=RequestMethod.GET)
+	public ArrayList<String> fetchAllFilesByCategory(@PathVariable String bookCategory) {
+			return bookService.fetchAllFilesByCategory(bookCategory);
+	}
+	
+	@RequestMapping(value="/Catalog", method=RequestMethod.GET)
+	public ArrayList<String> fetchAllFiles() {
+		return bookService.fetchAllFiles(dirPath, flag);
+	}
+	
+	@RequestMapping(value= "/Books/newArrivalsCount", method = RequestMethod.GET)
+    public int countByInclusionDate() {
+        return bookService.countByInclusionDate();
     }
 	
 	
