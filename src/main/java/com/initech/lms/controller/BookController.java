@@ -1,6 +1,7 @@
 package com.initech.lms.controller;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,25 +36,35 @@ public class BookController {
 		return bookService.getAllBooks();
 	}
 	
-	@RequestMapping(value="/Books/editBook/{isbn}", method=RequestMethod.PUT)
-	public void updateBook(@RequestBody Book book){
-			bookService.updateBook(book);
-	}
-	
 	@RequestMapping(value="/Books/fetchBook/{isbn}", method=RequestMethod.GET)
-	public List<Book> getBookByIsbn(@PathVariable long isbn){
-		System.out.println("isbn inside controller is " + isbn);
-		return bookService.getBookByIsbn(isbn);
+	public List<Book> getAllBooksByIsbn(@PathVariable long isbn){
+		return bookService.getAllBooksByIsbn(isbn);
 	}
 	
-	@RequestMapping(value="/Books/deleteBook/{isbn}", method=RequestMethod.DELETE)
-    public void deleteBookByIsbn(@PathVariable long isbn) {
-         bookService.deleteBookByIsbn(isbn);
+	@RequestMapping(value="/Books/editBook/{isbn}", method=RequestMethod.PUT)
+	public void updateBook(@PathVariable long isbn, @RequestBody Book book) throws IOException{
+		bookService.updateBook(book);
+	}
+	
+	@RequestMapping(value="/Books/archiveBook/{isbn}", method=RequestMethod.PUT)
+    public void archiveBookByIsbn(@PathVariable long isbn, @RequestBody String bookArchiveReason)  {
+		
+		System.out.println("inside controller..." + isbn + bookArchiveReason);
+      	bookService.archiveBookByIsbn(isbn, bookArchiveReason);
     }
+	
+	
+	@RequestMapping(value="/Books/unArchiveBook/{isbn}", method=RequestMethod.PUT)
+    public void unArchiveBookByIsbn(@PathVariable long isbn)  {
+		
+		System.out.println("inside controller..." + isbn);
+      	bookService.unArchiveBookByIsbn(isbn);
+    }
+	
 	
 	@RequestMapping(value="/Catalog/{bookCategory}", method=RequestMethod.GET)
 	public ArrayList<String> fetchAllFilesByCategory(@PathVariable String bookCategory) {
-			return bookService.fetchAllFilesByCategory(bookCategory);
+		return bookService.fetchAllFilesByCategory(bookCategory);
 	}
 	
 	@RequestMapping(value="/Catalog", method=RequestMethod.GET)
@@ -65,6 +76,5 @@ public class BookController {
     public int countByInclusionDate() {
         return bookService.countByInclusionDate();
     }
-	
 	
 }
