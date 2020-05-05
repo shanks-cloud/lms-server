@@ -1,24 +1,16 @@
 package com.initech.lms.models;
 
+import java.time.ZonedDateTime;
+
 import javax.persistence.Column;
-
 import javax.persistence.Entity;
-
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
-
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Book")
 public class Book {
-
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO)
-//	@Column(name = "bookId")
-//	private int bookId;
-
+	
 	@Id
 	@Column(name = "isbn")
 	private long isbn;
@@ -33,7 +25,8 @@ public class Book {
 	private String publisher;
 
 	@Column(name = "inclusionDate", nullable = false)
-	private String inclusionDate;
+	//private String inclusionDate;
+	private ZonedDateTime inclusionDate;
 
 	@Column(name = "bookCategory", nullable = false)
 	private String bookCategory;
@@ -41,31 +34,47 @@ public class Book {
 	@Column(name = "bookImageName")
 	private String bookImageName;
 	
+	@Column(name = "bookArchiveReason")
+	private String bookArchiveReason;
+	
+	@Column(name = "archiveFlag")
+	private boolean archiveFlag;
+	
+	@Column(name = "lang")
+	private String lang;
+	
+	@Column(name = "bookPrice")
+	private double bookPrice;
+	
+	@Column(name = "bookCopies")
+	private int bookCopies;
+	
+	@Column(name = "pageCount")
+	private int pageCount;
+	
 	
 	public Book() {
-
+		
 	}
-
-	public Book(long isbn, String bookTitle, String publisher, String author, String inclusionDate,
-			String bookCategory, String bookImageName) {
+	
+	public Book(long isbn, String bookTitle, String author, String publisher, ZonedDateTime inclusionDate, String bookCategory,
+			String bookImageName, String bookArchiveReason, boolean archiveFlag, String lang, double bookPrice,
+			int bookCopies, int pageCount) {
 		super();
-		//this.bookId = bookId;
 		this.isbn = isbn;
 		this.bookTitle = bookTitle;
-		this.publisher = publisher;
 		this.author = author;
+		this.publisher = publisher;
 		this.inclusionDate = inclusionDate;
 		this.bookCategory = bookCategory;
 		this.bookImageName = bookImageName;
+		this.bookArchiveReason = bookArchiveReason;
+		this.archiveFlag = archiveFlag;
+		this.lang = lang;
+		this.bookPrice = bookPrice;
+		this.bookCopies = bookCopies;
+		this.pageCount = pageCount;
 	}
-
-//	public int getBookId() {
-//		return bookId;
-//	}
-//
-//	public void setBookId(int bookId) {
-//		this.bookId = bookId;
-//	}
 
 	public long getIsbn() {
 		return isbn;
@@ -83,14 +92,6 @@ public class Book {
 		this.bookTitle = bookTitle;
 	}
 
-	public String getPublisher() {
-		return publisher;
-	}
-
-	public void setPublisher(String publisher) {
-		this.publisher = publisher;
-	}
-
 	public String getAuthor() {
 		return author;
 	}
@@ -99,11 +100,19 @@ public class Book {
 		this.author = author;
 	}
 
-	public String getInclusionDate() {
+	public String getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+
+	public ZonedDateTime getInclusionDate() {
 		return inclusionDate;
 	}
 
-	public void setInclusionDate(String inclusionDate) {
+	public void setInclusionDate(ZonedDateTime inclusionDate) {
 		this.inclusionDate = inclusionDate;
 	}
 
@@ -123,5 +132,52 @@ public class Book {
 		this.bookImageName = bookImageName;
 	}
 
+	public String getBookArchiveReason() {
+		return bookArchiveReason;
+	}
+
+	public void setBookArchiveReason(String bookArchiveReason) {
+		this.bookArchiveReason = bookArchiveReason;
+	}
+
+	public String getLang() {
+		return lang;
+	}
+
+	public void setLang(String lang) {
+		this.lang = lang;
+	}
+
+	public double getBookPrice() {
+		return bookPrice;
+	}
+
+	public void setBookPrice(double bookPrice) {
+		this.bookPrice = bookPrice;
+	}
+
+	public int getBookCopies() {
+		return bookCopies;
+	}
+
+	public void setBookCopies(int bookCopies) {
+		this.bookCopies = bookCopies;
+	}
+
+	public int getPageCount() {
+		return pageCount;
+	}
+
+	public void setPageCount(int pageCount) {
+		this.pageCount = pageCount;
+	}
+
+	public boolean isArchiveFlag() {
+		return archiveFlag;
+	}
+
+	public void setArchiveFlag(boolean archiveFlag) {
+		this.archiveFlag = archiveFlag;
+	}
 
 }

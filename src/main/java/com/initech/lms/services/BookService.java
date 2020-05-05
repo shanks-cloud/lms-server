@@ -16,55 +16,63 @@ import com.initech.lms.repository.BookRepository;
 public class BookService {
 	
 	File sourceFile, targetFile;
-	String sourcePath, targetPath, bookCategory, bookImageName, str, dirName, firstDirPath, oldDirName;
-	//ArrayList <String> strCatalogLst = new ArrayList<String>();
+	String sourcePath, targetPath, archivePath, bookCategory, bookImageName, str, dirName, firstDirPath, oldDirName;
 	ArrayList <String> strCategoryLst;
 	ArrayList <String> strCatalogLst;
-		
 	
 	long isbn;
 	boolean flag=false;
 	File[] fileLst;
 	
-	
 	@Autowired
 	private BookRepository bookRepository;
-
+			
 	public void addBook(Book book) throws IOException {
-		bookRepository.save(book);
-		this.moveFile(book);
+			bookRepository.save(book);
+			this.tagIsbnMoveFile(book);
 	}
 	
-	public List<Book> getAllBooks() {
-		return bookRepository.findAll();
+	public List<Book> getAllBooks() {  
+	       return bookRepository.findAll();
+	}
+		
+	public void updateBook(Book book) throws IOException {
+			bookRepository.save(book);
 	}
 	
-	
-	public void updateBook(Book book) {
-		bookRepository.save(book);
-	}
-	
-	
-	public List<Book> getBookByIsbn(long isbn) {
+	public List<Book> getAllBooksByIsbn(long isbn) {
 		return bookRepository.findByIsbn(isbn);
 	}
 	
-	public void deleteBookByIsbn(long isbn) {
-		bookRepository.deleteById(isbn);
-    }
+	public void archiveBookByIsbn(long isbn, String bookArchiveReason) {
+			Book book = bookRepository.findById(isbn).get();
+			book.setArchiveFlag(true);
+			book.setBookArchiveReason(bookArchiveReason);
+			bookRepository.save(book);
+			
+			this.archiveFile(book);
+	}
+	
+		
+	public void unArchiveBookByIsbn(long isbn) {
+		Book book = bookRepository.findById(isbn).get();
+		book.setArchiveFlag(false);
+		book.setBookArchiveReason(null);
+		bookRepository.save(book);
+		
+		this.unArchiveFile(book);
+		
+	}
 	
 	
-	public boolean moveFile(Book book) throws IOException {
+	public boolean tagIsbnMoveFile(Book book) throws IOException {
+		
 		bookCategory = book.getBookCategory();
 		bookImageName = book.getBookImageName();
 		isbn = book.getIsbn();
 		
-		System.out.println("Book Category is.. " + book.getBookCategory());
-		System.out.println("Book name is.. " + book.getBookImageName());
-		
-		
-		sourcePath="assets/images/source/" + bookCategory + "/" + bookImageName;
-		targetPath="assets/images/target/" + bookCategory + "/" + isbn + "-" + bookImageName;
+		sourcePath = "assets/images/source/" + bookCategory + "/" + bookImageName;
+		targetPath = "assets/images/target/" + bookCategory + "/" + isbn + "-" + bookImageName;
 		
 		sourceFile = new File(sourcePath);
 		targetFile= new File(targetPath);
@@ -81,6 +89,56 @@ public class BookService {
 	}
 	
 	
+	public boolean archiveFile(Book book) {
+		
+		bookCategory = book.getBookCategory();
+		bookImageName = book.getBookImageName();
+				
+		targetPath = "assets/images/target/" + bookCategory + "/" + isbn + "-" + bookImageName;
+		System.out.println("target path is ..." + targetPath);
+		
+		archivePath= "assets/images/archive/" + bookCategory + "/" + isbn + "-" + bookImageName;
+		System.out.println("archive path is ..." + archivePath);
+		
+		sourceFile = new File(targetPath);
+		targetFile= new File(archivePath);
+		if (sourceFile.renameTo(targetFile)) {
+			System.out.println("Source file moved to archive location successfully..");
+			flag = true;
+			return flag;
+		} else {
+			System.out.println("error in moving the file to archive location..");
+			flag = false;
+			return flag;
+		}
+	}
+	
+	public boolean unArchiveFile(Book book) {
+		
+		bookCategory = book.getBookCategory();
+		bookImageName = book.getBookImageName();
+		isbn = book.getIsbn();
+				
+		targetPath = "assets/images/target/" + bookCategory + "/" + isbn + "-" + bookImageName;
+		System.out.println("target path is ..." + targetPath);
+		
+		archivePath= "assets/images/archive/" + bookCategory + "/" + isbn + "-" + bookImageName;
+		System.out.println("archive path is ..." + archivePath);
+		
+		sourceFile = new File(archivePath);
+		targetFile= new File(targetPath);
+		if (sourceFile.renameTo(targetFile)) {
+			System.out.println("Source file moved to target location successfully..");
+			flag = true;
+			return flag;
+		} else {
+			System.out.println("error in moving the file to target location..");
+			flag = false;
+			return flag;
+		}
+	}
+	
+		
 	public ArrayList<String> fetchAllFilesByCategory(String bookCategory) {
 		File file = new File("assets/images/target/" + bookCategory);
 		fileLst = file.listFiles();
