@@ -1,4 +1,4 @@
-package com.lms.initech.bean;
+package com.initech.lms.bean;
 
 public class AuthenticationBean {
 
@@ -17,9 +17,8 @@ public class AuthenticationBean {
 		this.message = message;
 	}
 	
-	 @Override
-	 public String toString() {
-	        return String.format("HelloWorldBean [message=%s]", message);
-	 }
-	
+//	 @Override
+//	 public String toString() {
+//	        return String.format("HelloWorldBean [message=%s]", message);
+//	 }
 }
