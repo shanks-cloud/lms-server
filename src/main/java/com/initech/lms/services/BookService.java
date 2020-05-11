@@ -3,6 +3,8 @@ package com.initech.lms.services;
 import java.io.File;
 import java.io.IOException;
 
+import java.time.ZonedDateTime;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,8 +48,12 @@ public class BookService {
 	
 	public void archiveBookByIsbn(long isbn, String bookArchiveReason) {
 			Book book = bookRepository.findById(isbn).get();
+			ZonedDateTime inclusionDate = ZonedDateTime.now();
+			
 			book.setArchiveFlag(true);
 			book.setBookArchiveReason(bookArchiveReason);
+			book.setInclusionDate(inclusionDate);
+			
 			bookRepository.save(book);
 			
 			this.archiveFile(book);
@@ -56,8 +62,12 @@ public class BookService {
 		
 	public void unArchiveBookByIsbn(long isbn) {
 		Book book = bookRepository.findById(isbn).get();
+		ZonedDateTime inclusionDate = ZonedDateTime.now();
+		
 		book.setArchiveFlag(false);
 		book.setBookArchiveReason(null);
+		book.setInclusionDate(inclusionDate);
+		
 		bookRepository.save(book);
 		
 		this.unArchiveFile(book);
@@ -78,11 +88,11 @@ public class BookService {
 		targetFile= new File(targetPath);
 		 
 		if (sourceFile.renameTo(targetFile)) {
-			System.out.println("Source file moved to target location successfully..");
+			System.out.println("source to target successful..");
 			flag = true;
 			return flag;
 		} else {
-			System.out.println("error in moving the file to target location..");
+			System.out.println("error in moving the file from source to target location..");
 			flag = false;
 			return flag;
 		}
@@ -93,6 +103,7 @@ public class BookService {
 		
 		bookCategory = book.getBookCategory();
 		bookImageName = book.getBookImageName();
+		isbn = book.getIsbn();
 				
 		targetPath = "assets/images/target/" + bookCategory + "/" + isbn + "-" + bookImageName;
 		System.out.println("target path is ..." + targetPath);
@@ -103,11 +114,11 @@ public class BookService {
 		sourceFile = new File(targetPath);
 		targetFile= new File(archivePath);
 		if (sourceFile.renameTo(targetFile)) {
-			System.out.println("Source file moved to archive location successfully..");
+			System.out.println("taget to archive successful..");
 			flag = true;
 			return flag;
 		} else {
-			System.out.println("error in moving the file to archive location..");
+			System.out.println("error in moving the file from target to archive location..");
 			flag = false;
 			return flag;
 		}
@@ -128,11 +139,11 @@ public class BookService {
 		sourceFile = new File(archivePath);
 		targetFile= new File(targetPath);
 		if (sourceFile.renameTo(targetFile)) {
-			System.out.println("Source file moved to target location successfully..");
+			System.out.println("archive to target successful..");
 			flag = true;
 			return flag;
 		} else {
-			System.out.println("error in moving the file to target location..");
+			System.out.println("error in moving the file from archive to target location..");
 			flag = false;
 			return flag;
 		}
