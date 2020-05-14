@@ -7,8 +7,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @EnableWebSecurity
 @SpringBootApplication
 public class LmsApp {
+	
+      public static void main(String[] args) {
+    	  	SpringApplication.run(LmsApp.class, args);
 
-	public static void main(String[] args) {
-		SpringApplication.run(LmsApp.class, args);
-	}
+      }
 }

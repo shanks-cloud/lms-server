@@ -20,7 +20,8 @@ import com.initech.lms.services.BookService;
 @CrossOrigin(origins="http://localhost:4200")
 public class BookController {
 	
-	String dirPath = "assets/images/target/";
+	//String dirPath = "assets/images/target/";
+	String dirPath = "assets/images/books/";
 	boolean flag=true;
 	
 	@Autowired
@@ -64,12 +65,13 @@ public class BookController {
 	
 	@RequestMapping(value="/Catalog/{bookCategory}", method=RequestMethod.GET)
 	public ArrayList<String> fetchAllFilesByCategory(@PathVariable String bookCategory) {
-		return bookService.fetchAllFilesByCategory(bookCategory);
+		return bookService.fetchAllActiveImagesByCategory(bookCategory);
 	}
 	
 	@RequestMapping(value="/Catalog", method=RequestMethod.GET)
 	public ArrayList<String> fetchAllFiles() {
-		return bookService.fetchAllFiles(dirPath, flag);
+		//return bookService.fetchAllFiles(dirPath, flag);
+		return bookService.fetchAllActiveImages();
 	}
 	
 	@RequestMapping(value= "/Books/newArrivalsCount", method = RequestMethod.GET)
