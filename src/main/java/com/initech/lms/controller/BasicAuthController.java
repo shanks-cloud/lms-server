@@ -24,8 +24,7 @@ public class BasicAuthController {
 	
 	//@GetMapping(path = "/basicauth")
 	@RequestMapping(value="/home/basicauth", method=RequestMethod.POST)
-	public boolean basicAuth(@RequestBody User user, @RequestHeader HttpHeaders headers) throws Exception {
+	public void basicAuth(@RequestBody User user, @RequestHeader HttpHeaders headers) throws Exception {
 		System.out.println("inside basicauth controller..");
-		return basicAuthService.fetchEmailIdAndPassword(user, headers);
 	}
 }

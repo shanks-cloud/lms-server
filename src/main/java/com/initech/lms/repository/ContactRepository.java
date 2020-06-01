@@ -8,6 +8,8 @@ import com.initech.lms.models.Contact;
 
 public interface ContactRepository extends JpaRepository<Contact, Long>{
 
-	public List<Contact> findAllByEmailId(String emailId);
+	public Contact findByEmailId(String emailId);
+	
+	
 	
 }

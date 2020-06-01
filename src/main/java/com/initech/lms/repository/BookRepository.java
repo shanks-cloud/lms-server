@@ -11,7 +11,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
 	public List<Book> findByIsbn(long isbn);
 	
-	@Query(value="SELECT count(inclusion_date) FROM lms.book WHERE inclusion_date >= DATE(CURDATE()) - INTERVAL 7 DAY AND archive_flag<>true", nativeQuery=true)
+	@Query(value="SELECT count(inclusion_date) FROM lms.book WHERE inclusion_date >= DATE(CURDATE()) - INTERVAL 7 DAY AND archive_flag = false", nativeQuery=true)
 	public int countByInclusionDate();
 	
 	public List<Book> findAllByBookCategory(String bookCategory);
