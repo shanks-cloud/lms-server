@@ -21,13 +21,22 @@ public class MemberController {
 	private MemberService memberService;
 	
 	
-	@RequestMapping(value="/Register", method=RequestMethod.POST)
+	@RequestMapping(value="Member/Register", method=RequestMethod.POST)
 	public void register(@RequestBody ProfileDTO profileDTO) throws IOException {
 		
 		//System.out.println("memberId server-side inside controller.." + profileDTO.getMemberId());
 		
 		memberService.register(profileDTO);
 	}
+	
+	
+	@RequestMapping(value="/Member/newMembersCount", method=RequestMethod.GET)
+	public int getNewMembersCount() {
+		return memberService.getNewMembersCount();
+	}
+	
+	
+	
 	
 	
 //	@RequestMapping(value="/Profile", method=RequestMethod.POST)

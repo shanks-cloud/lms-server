@@ -1,5 +1,7 @@
 package com.initech.lms.DTO;
 
+import java.time.ZonedDateTime;
+
 public class ProfileDTO {
 
 	private long memberId;
@@ -15,6 +17,8 @@ public class ProfileDTO {
 	private long mobileNumber;
 	private String emailId;
 	private String password;
+	private ZonedDateTime enrollmentDate;
+	private String memberStatus;
 	
 	public long getMemberId() {
 		return memberId;
@@ -93,6 +97,18 @@ public class ProfileDTO {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public ZonedDateTime getEnrollmentDate() {
+		return enrollmentDate;
+	}
+	public void setEnrollmentDate(ZonedDateTime enrollmentDate) {
+		this.enrollmentDate = enrollmentDate;
+	}
+	public String getMemberStatus() {
+		return memberStatus;
+	}
+	public void setMemberStatus(String memberStatus) {
+		this.memberStatus = memberStatus;
 	}
 	
 }

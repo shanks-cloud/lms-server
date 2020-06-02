@@ -1,5 +1,7 @@
 package com.initech.lms.models;
 
+import java.time.ZonedDateTime;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,6 +33,13 @@ public class Member {
 	
 	@Column(name = "password")
 	private String password;
+	
+	@Column(name = "enrollmentDate")
+	private ZonedDateTime enrollmentDate;
+	
+	@Column(name = "memberStatus")
+	private String memberStatus;
+	
 	
 //	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 //	@JoinColumn (name="contactId")
@@ -77,11 +86,20 @@ public class Member {
 		this.password = password;
 	}
 
-//	public Contact getContact() {
-//		return contact;
-//	}
-//
-//	public void setContact(Contact contact) {
-//		this.contact = contact;
-//	}
+	public ZonedDateTime getEnrollmentDate() {
+		return enrollmentDate;
+	}
+
+	public void setEnrollmentDate(ZonedDateTime enrollmentDate) {
+		this.enrollmentDate = enrollmentDate;
+	}
+
+	public String getMemberStatus() {
+		return memberStatus;
+	}
+
+	public void setMemberStatus(String memberStatus) {
+		this.memberStatus = memberStatus;
+	}
+
 }

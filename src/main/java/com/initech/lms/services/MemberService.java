@@ -1,6 +1,7 @@
 package com.initech.lms.services;
 
 import java.io.IOException;
+import java.time.ZonedDateTime;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +36,21 @@ public class MemberService {
 		member = modelMapper.map(profileDTO, Member.class);
 		contact = modelMapper.map(profileDTO,  Contact.class);
 		
+		ZonedDateTime enrollmentDate = ZonedDateTime.now();
+		member.setEnrollmentDate(enrollmentDate);
+		
+		member.setMemberStatus("active");
+		
 		System.out.println("inside service member class " + member.getMemberId());
 		System.out.println("inside service contact class " + contact.getMember().getMemberId());
 				
 		contactRepository.save(contact);
 		memberRepository.save(member);
 	}
+	
+	
+	public int getNewMembersCount() {
+		return memberRepository.countByEnrollmentDate();
+	}
+	
 }
