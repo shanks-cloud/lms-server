@@ -2,6 +2,7 @@ package com.initech.lms.services;
 
 import java.io.IOException;
 import java.time.ZonedDateTime;
+import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,10 @@ public class MemberService {
 	
 	public int getNewMembersCount() {
 		return memberRepository.countByEnrollmentDate();
+	}
+	
+	public Contact fetchEmailId(String emailId) {
+		return contactRepository.findByEmailId(emailId);
 	}
 	
 }

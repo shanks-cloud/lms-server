@@ -34,34 +34,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
             .and()
             .httpBasic();
 		
-		
-//		http.cors()
-//		 .disable()
-//		 .authorizeRequests()
-//		 .antMatchers("/Member/Register").permitAll()
-//		 .anyRequest()
-//		 .authenticated()
-//		 .and()
-//		 .httpBasic();
-		
 //		http.cors().disable()
 //		 .authorizeRequests()
 //		 .antMatchers("/**").permitAll()
 //		 .antMatchers("/").permitAll()
 //		 .anyRequest().authenticated()
 //		 .and()
-//		 .formLogin();
-		 
-		
-		
-//		http  
-//        .authorizeRequests()  
-//        .anyRequest().authenticated() 
-//        .and()
-//        .formLogin() 
-//        .and()
-//        .httpBasic();  
-			
+//		 .formLogin();			
 	}
 		
 	@Override
@@ -72,12 +51,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/Member/Register");
+		web.ignoring().antMatchers("/Member/fetchMember/{emailId}");
 	}
-	
 	
 	@Bean
 	public PasswordEncoder getPasswordEncoder() {
 		return NoOpPasswordEncoder.getInstance();
 	}
-		
 }
