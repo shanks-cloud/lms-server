@@ -16,4 +16,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 	
 	public List<Book> findAllByBookCategory(String bookCategory);
 	
+	@Query(value="select * from lms.book where archive_flag = false order by book_category", nativeQuery=true)
+	public List<Book> findAllBooksByArchiveFlag();
+	
 }

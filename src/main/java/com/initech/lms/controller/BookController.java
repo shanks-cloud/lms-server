@@ -74,9 +74,14 @@ public class BookController {
 		return bookService.fetchAllActiveImages();
 	}
 	
-	@RequestMapping(value= "/Books/newArrivalsCount", method = RequestMethod.GET)
+	@RequestMapping(value="/Books/newArrivalsCount", method = RequestMethod.GET)
     public int countByInclusionDate() {
         return bookService.countByInclusionDate();
     }
+	
+	@RequestMapping(value="/Books/allActiveBooks", method = RequestMethod.GET)
+	public List<Book> getAllActiveBooks() {
+		return bookService.getAllActiveBooks();
+	}
 	
 }

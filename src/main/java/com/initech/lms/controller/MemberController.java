@@ -44,6 +44,11 @@ public class MemberController {
 		return memberService.fetchEmailId(emailId);
 	}
 	
+	@RequestMapping(value="/Member/fetchAllMembers")
+	public List<Member> getAllMembers() {
+		return memberService.getAllMembers();
+	}
+	
 	
 //	@RequestMapping(value="/Profile", method=RequestMethod.POST)
 //	public void addProfile(@RequestBody ProfileDTO profileDTO) throws IOException {

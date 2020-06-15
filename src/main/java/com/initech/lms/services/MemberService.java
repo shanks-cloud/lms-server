@@ -58,4 +58,8 @@ public class MemberService {
 		return contactRepository.findByEmailId(emailId);
 	}
 	
+	public List<Member> getAllMembers() {
+		return memberRepository.findAll();
+	}
+	
 }

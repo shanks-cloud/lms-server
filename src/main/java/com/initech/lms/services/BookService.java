@@ -248,4 +248,9 @@ public class BookService {
 	public int countByInclusionDate() {
 		return bookRepository.countByInclusionDate();
 	}
+	
+	public List<Book> getAllActiveBooks() {
+		return bookRepository.findAllBooksByArchiveFlag();
+	}
+	
 }
