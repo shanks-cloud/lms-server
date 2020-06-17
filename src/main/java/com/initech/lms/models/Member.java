@@ -6,11 +6,10 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -45,7 +44,11 @@ public class Member {
 //	@JoinColumn (name="contactId")
 //	private Contact contact;
 	
+	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn (name="memberId")
+	private BookCheckout bookCheckout;
 	
+		
 	public long getMemberId() {
 		return memberId;
 	}
@@ -100,6 +103,14 @@ public class Member {
 
 	public void setMemberStatus(String memberStatus) {
 		this.memberStatus = memberStatus;
+	}
+
+	public BookCheckout getBookCheckout() {
+		return bookCheckout;
+	}
+
+	public void setBookCheckout(BookCheckout bookCheckout) {
+		this.bookCheckout = bookCheckout;
 	}
 
 }
