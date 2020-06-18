@@ -44,11 +44,7 @@ public class Member {
 //	@JoinColumn (name="contactId")
 //	private Contact contact;
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn (name="memberId")
-	private BookCheckout bookCheckout;
 	
-		
 	public long getMemberId() {
 		return memberId;
 	}
@@ -105,12 +101,16 @@ public class Member {
 		this.memberStatus = memberStatus;
 	}
 
-	public BookCheckout getBookCheckout() {
-		return bookCheckout;
-	}
+//	public Contact getContact() {
+//		return contact;
+//	}
+//
+//	public void setContact(Contact contact) {
+//		this.contact = contact;
+//	}
 
-	public void setBookCheckout(BookCheckout bookCheckout) {
-		this.bookCheckout = bookCheckout;
-	}
+	
+	
+	
 
 }

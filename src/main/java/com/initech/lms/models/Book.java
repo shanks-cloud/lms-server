@@ -2,13 +2,9 @@ package com.initech.lms.models;
 
 import java.time.ZonedDateTime;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -56,8 +52,11 @@ public class Book {
 	@Column(name = "pageCount")
 	private int pageCount;
 	
+//	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+//	@JoinColumn (name="memberId")
+//	private BookCheckout bookCheckout;
 	
-		
+	
 	public Book() {
 		
 	}
@@ -184,5 +183,5 @@ public class Book {
 	public void setArchiveFlag(boolean archiveFlag) {
 		this.archiveFlag = archiveFlag;
 	}
-
+	
 }

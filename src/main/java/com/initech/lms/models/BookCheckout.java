@@ -1,16 +1,14 @@
 package com.initech.lms.models;
 
-import javax.persistence.CascadeType;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,19 +20,12 @@ public class BookCheckout {
 	@Column(name = "bookCheckOutId")
 	private long bookCheckOutId;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn (name="isbn", referencedColumnName="isbn")
-	private Book book;
+	@ElementCollection
+	@Column(name="isbn")
+	private List<Long> isbn = new ArrayList<>();
 	
-	@Column(name = "isbn")
-	private long isbn;
-	
-	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn (name="memberId", referencedColumnName="memberId")
-	private Member member;
-	
-	@Column(name = "memberId")
-    private long memberId;
+	@Column(name="memberId")
+	private long memberId;
 	
 	@Column(name="firstName")
 	private String firstName;
@@ -67,6 +58,14 @@ public class BookCheckout {
 		this.lastName = lastName;
 	}
 
+	public List<Long> getIsbn() {
+		return isbn;
+	}
+
+	public void setIsbn(List<Long> isbn) {
+		this.isbn = isbn;
+	}
+
 	public long getMemberId() {
 		return memberId;
 	}
@@ -75,19 +74,4 @@ public class BookCheckout {
 		this.memberId = memberId;
 	}
 
-	public Book getBook() {
-		return book;
-	}
-
-	public void setBook(Book book) {
-		this.book = book;
-	}
-
-	public long getIsbn() {
-		return isbn;
-	}
-
-	public void setIsbn(long isbn) {
-		this.isbn = isbn;
-	}
 }

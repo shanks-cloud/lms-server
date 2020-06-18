@@ -13,6 +13,7 @@ public class BookCheckoutService {
 	private BookCheckoutRepository bookCheckoutRepository;
 	
 	public void checkoutBook(BookCheckout checkoutData) {
+		System.out.println("BookCheckOut data is ... " + checkoutData.getMemberId());
 		bookCheckoutRepository.save(checkoutData);
 	}
 }

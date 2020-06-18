@@ -20,6 +20,7 @@ public class BookCheckoutController {
 	
 	@RequestMapping(value="/Books/BookCheckout", method=RequestMethod.POST)
 	public void checkoutBook(@RequestBody BookCheckout checkoutData) {
+		System.out.println("member value inside bookCheckOut controller.. " + checkoutData.getMemberId());
 		bookCheckoutService.checkoutBook(checkoutData);
 	}
 }
