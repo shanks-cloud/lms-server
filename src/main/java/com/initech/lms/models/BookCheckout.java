@@ -1,5 +1,6 @@
 package com.initech.lms.models;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +33,10 @@ public class BookCheckout {
 	
 	@Column(name="lastName")
 	private String lastName;
+	
+	@Column(name="checkOutDate")
+	private ZonedDateTime checkOutDate;
+	
 
 	public long getBookCheckOutId() {
 		return bookCheckOutId;
@@ -74,4 +79,13 @@ public class BookCheckout {
 		this.memberId = memberId;
 	}
 
+	public ZonedDateTime getCheckOutDate() {
+		return checkOutDate;
+	}
+
+	public void setCheckOutDate(ZonedDateTime checkOutDate) {
+		this.checkOutDate = checkOutDate;
+	}
+
+	
 }

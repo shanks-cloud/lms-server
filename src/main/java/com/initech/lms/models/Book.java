@@ -52,33 +52,32 @@ public class Book {
 	@Column(name = "pageCount")
 	private int pageCount;
 	
-//	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-//	@JoinColumn (name="memberId")
-//	private BookCheckout bookCheckout;
-	
-	
-	public Book() {
+	@Column(name = "checkOutStatus")
+	private boolean checkOutStatus;
 		
-	}
 	
-	public Book(long isbn, String bookTitle, String author, String publisher, ZonedDateTime inclusionDate, String bookCategory,
-			String bookImageName, String bookArchiveReason, boolean archiveFlag, String lang, double bookPrice,
-			int bookCopies, int pageCount) {
-		super();
-		this.isbn = isbn;
-		this.bookTitle = bookTitle;
-		this.author = author;
-		this.publisher = publisher;
-		this.inclusionDate = inclusionDate;
-		this.bookCategory = bookCategory;
-		this.bookImageName = bookImageName;
-		this.bookArchiveReason = bookArchiveReason;
-		this.archiveFlag = archiveFlag;
-		this.lang = lang;
-		this.bookPrice = bookPrice;
-		this.bookCopies = bookCopies;
-		this.pageCount = pageCount;
-	}
+//	public Book() {
+//		
+//	}
+	
+//	public Book(long isbn, String bookTitle, String author, String publisher, ZonedDateTime inclusionDate, String bookCategory,
+//			String bookImageName, String bookArchiveReason, boolean archiveFlag, String lang, double bookPrice,
+//			int bookCopies, int pageCount) {
+//		super();
+//		this.isbn = isbn;
+//		this.bookTitle = bookTitle;
+//		this.author = author;
+//		this.publisher = publisher;
+//		this.inclusionDate = inclusionDate;
+//		this.bookCategory = bookCategory;
+//		this.bookImageName = bookImageName;
+//		this.bookArchiveReason = bookArchiveReason;
+//		this.archiveFlag = archiveFlag;
+//		this.lang = lang;
+//		this.bookPrice = bookPrice;
+//		this.bookCopies = bookCopies;
+//		this.pageCount = pageCount;
+//	}
 
 	public long getIsbn() {
 		return isbn;
@@ -183,5 +182,14 @@ public class Book {
 	public void setArchiveFlag(boolean archiveFlag) {
 		this.archiveFlag = archiveFlag;
 	}
+
+	public boolean isCheckOutStatus() {
+		return checkOutStatus;
+	}
+
+	public void setCheckOutStatus(boolean checkOutStatus) {
+		this.checkOutStatus = checkOutStatus;
+	}
+
 	
 }

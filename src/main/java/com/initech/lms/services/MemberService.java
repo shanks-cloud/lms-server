@@ -2,6 +2,7 @@ package com.initech.lms.services;
 
 import java.io.IOException;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.initech.lms.DTO.ProfileDTO;
 import com.initech.lms.models.Contact;
 import com.initech.lms.models.Member;
+import com.initech.lms.repository.BookCheckoutRepository;
 import com.initech.lms.repository.ContactRepository;
 import com.initech.lms.repository.MemberRepository;
 
@@ -22,6 +24,9 @@ public class MemberService {
 	
 	@Autowired
 	private ContactRepository contactRepository;
+	
+	@Autowired
+	private BookCheckoutRepository bookCheckoutRepository;
 	
 	private ModelMapper modelMapper;
 	
@@ -59,7 +64,16 @@ public class MemberService {
 	}
 	
 	public List<Member> getAllMembers() {
-		return memberRepository.findAll();
+			
+		List <Member> members = memberRepository.findAll();
+		List <Member> newMembers = new ArrayList<Member>();
+		
+		for (Member mem : members) {
+			if (bookCheckoutRepository.countByMemberId(mem.getMemberId()) != 2) {
+				newMembers.add(mem);
+			}
+		}
+		return newMembers;
 	}
 	
 }

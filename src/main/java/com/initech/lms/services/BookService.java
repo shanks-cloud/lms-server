@@ -34,7 +34,7 @@ public class BookService {
 		bookImageName = book.getBookImageName();
 		sourcePath = "assets/images/books/" + bookCategory + "/" + bookImageName;
 		book.setBookImageName(sourcePath);
-
+		book.setCheckOutStatus(false);
 		bookRepository.save(book);
 		// this.tagIsbnMoveFile(book);
 		// this.tagIsbn(book);

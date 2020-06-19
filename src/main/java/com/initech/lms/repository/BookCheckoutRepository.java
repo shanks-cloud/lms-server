@@ -8,5 +8,7 @@ import com.initech.lms.models.BookCheckout;
 public interface BookCheckoutRepository extends JpaRepository<BookCheckout, Long> {
 
 	
+	public int countByMemberId(long memberId);
+	
 	
 }
